@@ -1,9 +1,0 @@
-Quais os pratos mais pedidos no restaurante?
-
-Qual a média de faturamento em mês do restaurante?
-
-Qual é a satisfação dos clientes em relação aos serviços prestados por garçons e funcionários da clínica?
-
-Existe algum padrão de comportamento entre clientes do restaurante que também utilizam os serviços da clínica dentária, e vice-versa?
-
-Quais tipos de procedimentos odontológicos são mais frequentemente realizados na clínica, e quais remédios são mais prescritos após esses procedimentos?
