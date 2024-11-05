@@ -1,0 +1,182 @@
+DROP SCHEMA IF EXISTS Eureka;
+CREATE SCHEMA Eureka;
+USE Eureka;
+/* Lógico_1: */
+
+/* Lógico_1: */
+
+CREATE TABLE Restaurante (
+    CnpjRestaurante VARCHAR(18),
+    NomeRestaurante VARCHAR(45),
+    Logradouro VARCHAR(255),
+    Numero VARCHAR(4),
+    CEP VARCHAR(9),
+    Numero_Loja_Restaurante INT(1),
+    
+    
+    PRIMARY KEY (CnpjRestaurante)
+);
+
+CREATE TABLE ConsultorioDentista (
+    CnpjClinica VARCHAR(18),
+    NomeClinica VARCHAR(45),
+    Logradouro VARCHAR(255),
+    Numero VARCHAR(4),
+    CEP VARCHAR(9),
+    Numero_Loja_Clinica INT(1),
+    
+    PRIMARY KEY (CnpjClinica)
+);
+
+
+CREATE TABLE Funcionarios_do_restaurante (
+    Sobrenome VARCHAR(45),
+    CPF VARCHAR(14),
+    Nome VARCHAR(45),
+    CEP INTEGER(8),
+    Bairro Varchar(45),
+    Numero INTEGER(5),
+    Cidade VARCHAR(45),
+    Logradouro VARCHAR(45),
+    Id_Manobrista VARCHAR(18),
+    Id_Chef VARCHAR(18),
+    Id_ass_Coz VARCHAR(18),
+    Id_Gerente VARCHAR(18),
+    Id_Garcom VARCHAR(18),
+    Funcionarios_do_restaurante_TIPO INT,
+    
+    PRIMARY KEY (CPF)
+);
+
+CREATE TABLE Cardapio (
+    Cod INT(20) PRIMARY KEY,
+    Item VARCHAR(255),
+    Valor VARCHAR(45)
+);
+
+CREATE TABLE Mesa (
+    Numero_Mesa INT(20) PRIMARY KEY,
+    ID_garcom VARCHAR(14),
+	ID_garcom2 VARCHAR(14)
+    
+);
+
+CREATE TABLE Pedido (
+    NumeroConta INT PRIMARY KEY,
+    Data VARCHAR(10),
+    fk_Mesa_Numero_Mesa INT(20)
+);
+
+
+CREATE TABLE Gera (
+    fk_Pedido_NumeroConta INT,
+    fk_Conta_NFS INT(4)
+);
+
+
+
+CREATE TABLE Conta (
+    NFS INT(4) PRIMARY KEY,
+    fk_NumeroConta INT,
+    ValorTotal Varchar(20)
+);
+
+CREATE TABLE Faz (
+    fk_Pedido_NumeroConta INT,
+    fk_Cardapio_Cod INT(20)
+);
+
+
+
+CREATE TABLE Funcionarios_da_clinica (
+    CPF VARCHAR(14),
+    Cidade VARCHAR(45),
+    Bairro Varchar(45),
+    Logradouro VARCHAR(45),
+    CEP INTEGER(8),
+    Numero INTEGER(5),
+    Sobrenome VARCHAR(45),
+    Nome VARCHAR(45),
+    IDSecretaria INT(1),
+    IDAssistente VarCHAR(2),
+    Especializacao VARCHAR(45),
+    IdDentista VARCHAR(3),
+    Funcionarios_da_clinica_TIPO INT,
+    
+    PRIMARY KEY (CPF)
+);
+
+
+
+CREATE TABLE Paciente (
+    Cidade_ VARCHAR(45),
+    Logradouro_ VARCHAR(45),
+    CEP_ INTEGER(8),
+    Bairro_ Varchar(45),
+    Numero_ INTEGER(5),
+    CPF_Paciente VARCHAR(14) PRIMARY KEY,
+    Sobrenome_Paciente VARCHAR(45),
+    Nome_Paciente VARCHAR(45)
+);
+
+CREATE TABLE Remedio (
+    Nome_Remedio VARCHAR(45) PRIMARY KEY
+);
+
+CREATE TABLE Procedimento (
+    Nome_Procedimento VARCHAR(45) PRIMARY KEY
+);
+
+
+
+
+CREATE TABLE Faz_Procedimento_Funcionarios_da_clinica_Paciente_Procedimento (
+    fk_Funcionarios_da_clinica_IdDentista VARCHAR(3),
+    fk_Paciente_CPF_Paciente VARCHAR(14),
+    fk_Procedimento_Nome_Procedimento VARCHAR(45),
+    P_Data VARCHAR(10)
+);
+
+CREATE TABLE Passa_Receita_Funcionarios_da_clinica_Remedio_Paciente (
+    fk_Funcionarios_da_clinica_IdDentista VARCHAR(3),
+    fk_Remedio_Nome_Remedio VARCHAR(45),
+    fk_Paciente_CPF_Paciente VARCHAR(14),
+    R_Data VARCHAR(10)
+);
+ 
+
+ ALTER TABLE Pedido ADD CONSTRAINT FK_Pedido_2
+    FOREIGN KEY (fk_Mesa_Numero_Mesa)
+    REFERENCES Mesa (Numero_Mesa)
+    ON DELETE RESTRICT;
+ 
+
+ 
+
+ 
+ALTER TABLE Faz ADD CONSTRAINT FK_Faz_1
+    FOREIGN KEY (fk_Pedido_NumeroConta)
+    REFERENCES Pedido (NumeroConta)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Faz ADD CONSTRAINT FK_Faz_2
+    FOREIGN KEY (fk_Cardapio_Cod)
+    REFERENCES Cardapio (Cod)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Gera ADD CONSTRAINT FK_Gera_1
+    FOREIGN KEY (fk_Pedido_NumeroConta)
+    REFERENCES Pedido (NumeroConta)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Gera ADD CONSTRAINT FK_Gera_2
+    FOREIGN KEY (fk_Conta_NFS)
+    REFERENCES Conta (NFS)
+    ON DELETE RESTRICT;
+ 
+
+ 
+
+ 
+
+ 
